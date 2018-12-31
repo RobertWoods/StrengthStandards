@@ -38,7 +38,8 @@ class StatusBoard extends React.Component {
     }
 
     getMax(){
-        return this.state.reps * this.state.weight;
+        if(Number(this.props.reps) === 1) return this.props.weight;
+        return this.props.maxEquation(this.state.reps, this.state.weight)
     }
 
     handleChange(event){
@@ -53,8 +54,9 @@ class StatusBoard extends React.Component {
         return(
             <div>
                 <div>
-                    <span>Reps</span><input type="text" className="repsInput" onChange={this.handleChange}/>
-                    <span><span>Weight</span><input className="weightInput" type="text" onChange={this.handleChange}/></span>
+                    <span>{this.props.exercise.name}</span>
+                    <span>Reps</span><input type="number" className="repsInput" onChange={this.handleChange}/>
+                    <span><span>Weight</span><input className="weightInput" type="number" onChange={this.handleChange}/></span>
                 </div>
                 <MaxRange exercise={this.props.exercise} value={this.getMax()}/>
             </div>
@@ -84,7 +86,7 @@ class ExerciseMaxForm extends React.Component {
 
         const boards = exercises.map((item, ind)=>{
             return(
-                <StatusBoard exercise={item} key={ind}/>
+                <StatusBoard exercise={item} key={ind} maxEquation={ (reps,weight)=>(0.03333 * Number(reps) * Number(weight)) + Number(weight) }/>
             )
         })
         return(
