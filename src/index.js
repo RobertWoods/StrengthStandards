@@ -97,5 +97,56 @@ class ExerciseMaxForm extends React.Component {
     }
 }
 
+function CalculationInformation(props){
+    return(
+        <div>
+            <input className="lifter-weight" type="text" onChange={(event)=>props.handler(event.target.value, false, false, false)}></input>
+            <input className="lifter-sex" type="text" onChange={(event)=>props.handler(false, event.target.value, false, false)}></input>
+            <input className="max-equation" type="text" onChange={(event)=>props.handler(false, false, event.target.value, false)}></input>
+            <input className="max-standards" type="text" onChange={(event)=>props.handler(false, false, false, event.target.value)}></input>
+        </div>
+    )
+}
+
+class StrengthStandards extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            lifterInformation:{
+                lifterWeight: 0,
+                lifterSex: "Female"
+            },
+            maxInformation: {
+                equation: "Wendler",
+                standards: "Nuckols:"
+            }
+        }
+        this.handleCalculationChange = this.handleCalculationChange.bind(this);
+    }
+
+    handleCalculationChange(lifterWeight, lifterSex, equation, standards){
+        this.setState({
+            lifterInformation: {
+                lifterWeight: lifterWeight ? lifterWeight : this.state.lifterInformation.lifterWeight,
+                lifterSex: lifterSex ? lifterSex : this.state.lifterInformation.lifterSex
+            },
+            maxInformation: {
+                equation: equation ? equation : this.state.maxInformation.equation,
+                standards: standards ? standards : this.state.maxInformation.standards
+            }
+        })
+    }
+
+    render(){
+        return(
+            <div>
+                <CalculationInformation handler={this.handleCalculationChange}/>
+                <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
+            </div>
+        )
+    }
+
+}
+
 const input = { max: 100 };
-ReactDOM.render(<ExerciseMaxForm/>, document.getElementById('root'));
+ReactDOM.render(<StrengthStandards/>, document.getElementById('root'));
