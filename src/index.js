@@ -19,6 +19,7 @@ function MaxRange(props){
 
     return(
         <div>
+            <span>{ parseInt(props.value) }</span>
             <input type="range" min="0" max={props.exercise.max} value={props.value} readOnly={true} title="Hello"/>
             <span>{getMessage()}</span>
         </div>
@@ -53,11 +54,11 @@ class StatusBoard extends React.Component {
     render(){
         return(
             <div>
-                <div>
-                    <span>{this.props.exercise.name}</span>
+                <label>
+                    {this.props.exercise.name}
                     <span>Reps</span><input type="number" className="repsInput" onChange={this.handleChange}/>
                     <span><span>Weight</span><input className="weightInput" type="number" onChange={this.handleChange}/></span>
-                </div>
+                </label>
                 <MaxRange exercise={this.props.exercise} value={this.getMax()}/>
             </div>
         )
@@ -98,12 +99,31 @@ class ExerciseMaxForm extends React.Component {
 }
 
 function CalculationInformation(props){
+    const standardOptions = props.standards.map((standard) => 
+        <option value={standard.name}>{standard.name}</option>
+    );
+    const equationOptions = props.equations.map((equation) =>
+    <option value={equation.name}>{equation.name}</option>
+    );
     return(
         <div>
-            <input className="lifter-weight" type="text" onChange={(event)=>props.handler(event.target.value, false, false, false)}></input>
-            <input className="lifter-sex" type="text" onChange={(event)=>props.handler(false, event.target.value, false, false)}></input>
-            <input className="max-equation" type="text" onChange={(event)=>props.handler(false, false, event.target.value, false)}></input>
-            <input className="max-standards" type="text" onChange={(event)=>props.handler(false, false, false, event.target.value)}></input>
+            <label>Weight
+                <input className="lifter-weight" type="text" onChange={(event)=>props.handler(event.target.value, false, false, false)}></input>
+            </label>
+            <label>Sex
+                <input className="lifter-sex" type="text" onChange={(event)=>props.handler(false, event.target.value, false, false)}></input>
+            </label>
+            <br/>
+            <label>Equation
+                <select className="max-equation" type="text" onChange={(event)=>props.handler(false, false, event.target.value, false)}>
+                    { equationOptions }
+                </select>
+            </label>
+            <label>Standards
+                <select className="max-standards" onChange={(event)=>props.handler(false, false, false, event.target.value)}>
+                    { standardOptions }
+                </select>
+            </label>
         </div>
     )
 }
@@ -122,7 +142,27 @@ class StrengthStandards extends React.Component {
             }
         }
         this.handleCalculationChange = this.handleCalculationChange.bind(this);
-    }
+    };
+
+    standardsList = [
+        {
+            name: 'I rock'
+        },
+        {
+            name: 'I roll'
+        }
+    ]
+
+    equationList = [
+        {
+            name: "Wendler",
+            equation: (reps,weight)=>(0.03333 * Number(reps) * Number(weight)) + Number(weight)
+        },
+        {
+            name: "Wacky",
+            equation: (reps, weight)=> weight
+        }
+    ]
 
     handleCalculationChange(lifterWeight, lifterSex, equation, standards){
         this.setState({
@@ -135,12 +175,13 @@ class StrengthStandards extends React.Component {
                 standards: standards ? standards : this.state.maxInformation.standards
             }
         })
+        console.log(this.state);
     }
 
     render(){
         return(
             <div>
-                <CalculationInformation handler={this.handleCalculationChange}/>
+                <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList}/>
                 <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
             </div>
         )
@@ -148,5 +189,4 @@ class StrengthStandards extends React.Component {
 
 }
 
-const input = { max: 100 };
 ReactDOM.render(<StrengthStandards/>, document.getElementById('root'));
