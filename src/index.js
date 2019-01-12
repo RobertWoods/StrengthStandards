@@ -87,7 +87,7 @@ class ExerciseMaxForm extends React.Component {
 
         const boards = exercises.map((item, ind)=>{
             return(
-                <StatusBoard exercise={item} key={ind} maxEquation={ (reps,weight)=>(0.03333 * Number(reps) * Number(weight)) + Number(weight) }/>
+                <StatusBoard exercise={item} key={ind} maxEquation={ this.props.maxInformation.equation.equation }/>
             )
         })
         return(
@@ -99,11 +99,11 @@ class ExerciseMaxForm extends React.Component {
 }
 
 function CalculationInformation(props){
-    const standardOptions = props.standards.map((standard) => 
-        <option value={standard.name}>{standard.name}</option>
+    const standardOptions = props.standards.map((standard, ind) => 
+        <option key={ind} value={standard.name}>{standard.name}</option>
     );
-    const equationOptions = props.equations.map((equation) =>
-    <option value={equation.name}>{equation.name}</option>
+    const equationOptions = props.equations.map((equation, ind) =>
+        <option key={ind} value={equation.name}>{equation.name}</option>
     );
     return(
         <div>
@@ -137,8 +137,8 @@ class StrengthStandards extends React.Component {
                 lifterSex: "Female"
             },
             maxInformation: {
-                equation: "Wendler",
-                standards: "Nuckols:"
+                equation: this.equationList[0],
+                standards: this.standardsList[0]
             }
         }
         this.handleCalculationChange = this.handleCalculationChange.bind(this);
@@ -156,13 +156,20 @@ class StrengthStandards extends React.Component {
     equationList = [
         {
             name: "Wendler",
-            equation: (reps,weight)=>(0.03333 * Number(reps) * Number(weight)) + Number(weight)
+            equation: (reps,weight) => (0.03333 * Number(reps) * Number(weight)) + Number(weight)
         },
         {
             name: "Wacky",
-            equation: (reps, weight)=> weight
+            equation: (reps, weight) => weight
         }
     ]
+
+    getMaxEquationFromName(name){
+        return this.equationList.reduce((acc, curr) => {
+            if(curr.name===name) return curr;
+            return acc;
+        });
+    }
 
     handleCalculationChange(lifterWeight, lifterSex, equation, standards){
         this.setState({
@@ -171,7 +178,7 @@ class StrengthStandards extends React.Component {
                 lifterSex: lifterSex ? lifterSex : this.state.lifterInformation.lifterSex
             },
             maxInformation: {
-                equation: equation ? equation : this.state.maxInformation.equation,
+                equation: equation ? this.getMaxEquationFromName(equation) : this.state.maxInformation.equation,
                 standards: standards ? standards : this.state.maxInformation.standards
             }
         })
