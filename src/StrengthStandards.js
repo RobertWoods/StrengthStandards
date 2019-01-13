@@ -73,15 +73,8 @@ export default class StrengthStandards extends React.Component {
         }
     ]
 
-    getMaxEquationFromName(name){
-        return this.equationList.reduce((acc, curr) => {
-            if(curr.name===name) return curr;
-            return acc;
-        });
-    }
-
-    getMaxStandardsFromName(name){
-        return this.standardsList.reduce((acc, curr) => {
+    getKeyFromName(name, list){
+        return list.reduce((acc, curr) => {
             if(curr.name===name) return curr;
             return acc;
         });
@@ -94,9 +87,8 @@ export default class StrengthStandards extends React.Component {
                 lifterSex: lifterSex ? lifterSex : this.state.lifterInformation.lifterSex
             },
             maxInformation: {
-                //TODO: Refactor into one function
-                equation: equation ? this.getMaxEquationFromName(equation) : this.state.maxInformation.equation,
-                standards: standards ? this.getMaxStandardsFromName(standards) : this.state.maxInformation.standards
+                equation: equation ? this.getKeyFromName(equation, this.equationList) : this.state.maxInformation.equation,
+                standards: standards ? this.getKeyFromName(standards, this.standardsList) : this.state.maxInformation.standards
             }
         })
         console.log(this.state);
