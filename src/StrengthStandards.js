@@ -21,10 +21,44 @@ export default class StrengthStandards extends React.Component {
 
     standardsList = [
         {
-            name: 'I rock'
+            name: 'I rock',
+            standards: [
+                {
+                    name: "Bench Press",
+                    max: 500,
+                    thresholds: [100,200,300,400,500]
+                },
+                {
+                    name: "Squat",
+                    max: 800,
+                    thresholds: [200,400,500,600,800]
+                },
+                {
+                    name: "Deadlift",
+                    max: 900,
+                    thresholds: [250,500,600,750,900]
+                }
+            ]
         },
         {
-            name: 'I roll'
+            name: 'I roll',
+            standards: [
+                {
+                    name: "Bench Press",
+                    max: 10,
+                    thresholds: [1,2,3,4,5]
+                },
+                {
+                    name: "Squat",
+                    max: 10,
+                    thresholds: [1,2,3,4,5]
+                },
+                {
+                    name: "Deadlift",
+                    max: 10,
+                    thresholds: [1,2,3,4,5]
+                }
+            ]
         }
     ]
 
@@ -46,6 +80,13 @@ export default class StrengthStandards extends React.Component {
         });
     }
 
+    getMaxStandardsFromName(name){
+        return this.standardsList.reduce((acc, curr) => {
+            if(curr.name===name) return curr;
+            return acc;
+        });
+    }
+
     handleCalculationChange(lifterWeight, lifterSex, equation, standards){
         this.setState({
             lifterInformation: {
@@ -53,8 +94,9 @@ export default class StrengthStandards extends React.Component {
                 lifterSex: lifterSex ? lifterSex : this.state.lifterInformation.lifterSex
             },
             maxInformation: {
+                //TODO: Refactor into one function
                 equation: equation ? this.getMaxEquationFromName(equation) : this.state.maxInformation.equation,
-                standards: standards ? standards : this.state.maxInformation.standards
+                standards: standards ? this.getMaxStandardsFromName(standards) : this.state.maxInformation.standards
             }
         })
         console.log(this.state);
@@ -64,7 +106,7 @@ export default class StrengthStandards extends React.Component {
         return(
             <div>
                 <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList}/>
-                <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
+                <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
             </div>
         )
     }
