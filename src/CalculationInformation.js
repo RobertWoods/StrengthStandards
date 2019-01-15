@@ -8,13 +8,17 @@ export default function CalculationInformation(props){
     const equationOptions = props.equations.map((equation, ind) =>
         <option key={ind} value={equation.name}>{equation.name}</option>
     );
+    const sexOptions = ['Male', 'Female'].map((sex, ind) => 
+        <option key={ind} value={sex}>{sex}</option>)
     return(
         <div>
             <label>Weight
                 <input className="lifter-weight" type="text" onChange={(event)=>props.handler(event.target.value, false, false, false)}></input>
             </label>
             <label>Sex
-                <input className="lifter-sex" type="text" onChange={(event)=>props.handler(false, event.target.value, false, false)}></input>
+                <select className="lifter-sex" type="text" onChange={(event)=>props.handler(false, event.target.value, false, false)}>
+                    { sexOptions }
+                </select>
             </label>
             <br/>
             <label>Equation

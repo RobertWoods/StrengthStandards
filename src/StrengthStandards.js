@@ -9,7 +9,7 @@ export default class StrengthStandards extends React.Component {
         this.state = {
             lifterInformation:{
                 lifterWeight: 0,
-                lifterSex: "Female"
+                lifterSex: "Male"
             },
             maxInformation: {
                 equation: this.equationList[0],
@@ -90,8 +90,7 @@ export default class StrengthStandards extends React.Component {
                 equation: equation ? this.getKeyFromName(equation, this.equationList) : this.state.maxInformation.equation,
                 standards: standards ? this.getKeyFromName(standards, this.standardsList) : this.state.maxInformation.standards
             }
-        })
-        console.log(this.state);
+        });
     }
 
     render(){
