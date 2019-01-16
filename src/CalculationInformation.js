@@ -1,36 +1,45 @@
 import React from 'react';
 import './index.css';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import { FormControl } from '@material-ui/core';
 
 export default function CalculationInformation(props){
     const standardOptions = props.standards.map((standard, ind) => 
-        <option key={ind} value={standard.name}>{standard.name}</option>
+        <MenuItem key={ind} value={standard.name}>{standard.name}</MenuItem>
     );
     const equationOptions = props.equations.map((equation, ind) =>
-        <option key={ind} value={equation.name}>{equation.name}</option>
+        <MenuItem key={ind} value={equation.name}>{equation.name}</MenuItem>
     );
     const sexOptions = ['Male', 'Female'].map((sex, ind) => 
-        <option key={ind} value={sex}>{sex}</option>)
+        <MenuItem key={ind} value={sex}>{sex}</MenuItem>)
     return(
         <div>
-            <label>Weight
-                <input className="lifter-weight" type="text" onChange={(event)=>props.handler(event.target.value, false, false, false)}></input>
-            </label>
-            <label>Sex
-                <select className="lifter-sex" type="text" onChange={(event)=>props.handler(false, event.target.value, false, false)}>
+            <TextField label="Weight" className="lifter-weight" type="number" onChange={(event)=>props.handler(event.target.value, false, false, false)}></TextField>
+
+            <FormControl variant="filled">
+                <InputLabel htmlFor="lifter-sex">Sex</InputLabel>
+                <Select id="lifter-sex" value={props.lifterInformation.lifterSex} onChange={(event)=>props.handler(false, event.target.value, false, false)}>
                     { sexOptions }
-                </select>
-            </label>
+                </Select>
+            </FormControl>
             <br/>
-            <label>Equation
-                <select className="max-equation" type="text" onChange={(event)=>props.handler(false, false, event.target.value, false)}>
+
+            <FormControl variant="filled">
+                <InputLabel htmlFor="max-equation">Equation</InputLabel>
+                <Select id="max-equation" value={props.maxInformation.equation.name} onChange={(event)=>props.handler(false, false, event.target.value, false)}>
                     { equationOptions }
-                </select>
-            </label>
-            <label>Standards
-                <select className="max-standards" onChange={(event)=>props.handler(false, false, false, event.target.value)}>
+                </Select>
+            </FormControl>
+
+            <FormControl variant="filled">
+                <InputLabel htmlFor="max-standards">Standard</InputLabel>
+                <Select id="max-standards" value={props.maxInformation.standards.name} onChange={(event)=>props.handler(false, false, false, event.target.value)}>
                     { standardOptions }
-                </select>
-            </label>
+                </Select>
+            </FormControl>
         </div>
     )
 }

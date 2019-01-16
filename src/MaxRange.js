@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import { LinearProgress } from '@material-ui/core';
 
 export default function MaxRange(props){
     
@@ -16,10 +17,11 @@ export default function MaxRange(props){
         return messages[messageIndex-1];
     }
 
+    const normalize = (value) => (value) * 100 / (props.exercise.max)
     return(
         <div>
+            <LinearProgress variant="determinate" value={normalize(props.value)} />
             <span>{ parseInt(props.value) }</span>
-            <input type="range" min="0" max={props.exercise.max} value={props.value} readOnly={true} title="Hello"/>
             <span>{getMessage()}</span>
         </div>
     )

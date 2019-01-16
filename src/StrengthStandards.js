@@ -96,7 +96,7 @@ export default class StrengthStandards extends React.Component {
     render(){
         return(
             <div>
-                <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList}/>
+                <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
                 <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
             </div>
         )
