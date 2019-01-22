@@ -19,7 +19,7 @@ export default function CalculationInformation(props){
     return(
         <Grid container direction="row" justify="center" alignItems="center">
             <Grid item xs={12}>
-                <Grid container direction="row" justify="center" alignItems="center">
+                <Grid container direction="row" justify="left" alignItems="center">
                     <Grid item xs={8} sm={4}>
                         <TextField label="Weight" className="lifter-weight" type="number" onChange={(event)=>props.handler(event.target.value, false, false, false)}></TextField>
                     </Grid>
@@ -35,7 +35,7 @@ export default function CalculationInformation(props){
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Grid container direction="row" justify="center" alignItems="center">
+                <Grid container direction="row" justify="left" alignItems="center">
                     <Grid item xs={8} sm={4}>
                         <FormControl variant="filled">
                             <InputLabel htmlFor="max-equation">Equation</InputLabel>

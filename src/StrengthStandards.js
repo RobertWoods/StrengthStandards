@@ -24,7 +24,7 @@ class StrengthStandards extends React.Component {
 
     standardsList = [
         {
-            name: 'I rock',
+            name: 'Decently High',
             standards: [
                 {
                     name: "Bench Press",
@@ -44,7 +44,7 @@ class StrengthStandards extends React.Component {
             ]
         },
         {
-            name: 'I roll',
+            name: 'Very Low',
             standards: [
                 {
                     name: "Bench Press",
@@ -71,7 +71,7 @@ class StrengthStandards extends React.Component {
             equation: (reps,weight) => (0.03333 * Number(reps) * Number(weight)) + Number(weight)
         },
         {
-            name: "Wacky",
+            name: "None",
             equation: (reps, weight) => weight
         }
     ]
@@ -114,7 +114,7 @@ class StrengthStandards extends React.Component {
 
 const styles = theme => ({
     root: {
-      ...theme.mixins.gutters(),
+        ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2
     },
@@ -130,6 +130,7 @@ const styles = theme => ({
         },
     },
     layout: {
+        ...theme.mixins.gutters(),
         width: 'auto',
         marginLeft: theme.spacing.unit * 2,
         marginRight: theme.spacing.unit * 2,
