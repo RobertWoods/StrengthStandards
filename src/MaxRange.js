@@ -1,8 +1,10 @@
 import React from 'react';
 import './index.css';
-import { LinearProgress } from '@material-ui/core';
+import { LinearProgress, withStyles, Grid } from '@material-ui/core';
+import { green200 } from 'material-ui/styles/colors';
+import { green50 } from 'material-ui/styles/colors';
 
-export default function MaxRange(props){
+function MaxRange(props){
     
     function getMessage(){
         const messages = [
@@ -18,11 +20,35 @@ export default function MaxRange(props){
     }
 
     const normalize = (value) => (value) * 100 / (props.exercise.max)
+
+    const { classes } = props;
+
     return(
-        <div>
-            <LinearProgress variant="determinate" value={normalize(props.value)} />
-            <span>{ parseInt(props.value) }</span>
-            <span>{getMessage()}</span>
+        <div className={classes.root}>
+            <Grid container direction="row" justify="left" alignItems="center">
+                <Grid item xs={2}>
+                    <span>{getMessage()}</span>
+                </Grid>
+                <Grid item xs={1}>
+                    <span>{ parseInt(props.value) }</span>
+                </Grid>
+            </Grid>
+            <LinearProgress classes={{colorPrimary: classes.linearColorPrimary, barColorPrimary: classes.linearBarColorPrimary}} variant="determinate" color="primary" value={normalize(props.value)} />
         </div>
     )
 }
+
+const styles = theme => ({
+        root: {
+            paddingTop: theme.spacing.unit * 2,
+            paddingBottom: theme.spacing.unit * 2
+        },
+            linearColorPrimary: {
+            backgroundColor: green50,
+        },
+            linearBarColorPrimary: {
+            backgroundColor: green200,
+        },
+});
+
+export default withStyles(styles)(MaxRange);

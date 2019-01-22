@@ -8,6 +8,7 @@ export default function ExerciseMaxForm(props) {
             <StatusBoard exercise={item} key={ind} maxEquation={ props.maxInformation.equation.equation }/>
         )
     })
+
     return(
         <div>
             {boards}

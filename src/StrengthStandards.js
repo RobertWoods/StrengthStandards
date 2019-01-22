@@ -2,8 +2,11 @@ import React from 'react';
 import './index.css';
 import ExerciseMaxForm from './ExerciseMaxForm';
 import CalculationInformation from './CalculationInformation';
+import { withStyles } from '@material-ui/core';
+import { Paper, CssBaseline } from '@material-ui/core';
+import { lightGreen50 } from 'material-ui/styles/colors';
 
-export default class StrengthStandards extends React.Component {
+class StrengthStandards extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -94,11 +97,48 @@ export default class StrengthStandards extends React.Component {
     }
 
     render(){
+        const { classes } = this.props;
         return(
             <div>
-                <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
-                <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
+                <CssBaseline />
+                <Paper className={classes.paper} >
+                    <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
+                </Paper>
+                <Paper className={classes.paper} >
+                    <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
+                </Paper>
             </div>
         )
     }
 }
+
+const styles = theme => ({
+    root: {
+      ...theme.mixins.gutters(),
+      paddingTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit * 2
+    },
+    paper: {
+        marginTop: theme.spacing.unit * 3,
+        marginBottom: theme.spacing.unit * 3,
+        backgroundColor: lightGreen50,
+        padding: theme.spacing.unit * 2,
+        [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+            marginTop: theme.spacing.unit * 6,
+            marginBottom: theme.spacing.unit * 6,
+            padding: theme.spacing.unit * 3,
+        },
+    },
+    layout: {
+        width: 'auto',
+        marginLeft: theme.spacing.unit * 2,
+        marginRight: theme.spacing.unit * 2,
+        [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+          width: 600,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        },
+      }
+  });
+
+export default withStyles(styles)(StrengthStandards);
