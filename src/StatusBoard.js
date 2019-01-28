@@ -41,12 +41,12 @@ export default class StatusBoard extends React.Component {
     render(){
         return(
             <div>
-                <Grid container direction="row" justify="left" alignItems="center">
+                <Grid container direction="row" justify="left" alignItems="center" spacing={16}>
                     <Grid item md={3}>
                         <TextField label={this.props.exercise.name} id="weightInput" InputProps={this.adornments[0]} type="number" onChange={this.handleChange}/>
                     </Grid>
                     <Grid item md={3}>
-                        <TextField id="repsInput" InputProps={this.adornments[1]} type="number" onChange={this.handleChange}/>
+                        <TextField label=' ' id="repsInput" InputProps={this.adornments[1]} type="number" onChange={this.handleChange}/>
                     </Grid>
                 </Grid>
                 <MaxRange exercise={this.props.exercise} value={this.getMax()}/>

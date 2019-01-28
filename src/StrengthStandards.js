@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import ExerciseMaxForm from './ExerciseMaxForm';
 import CalculationInformation from './CalculationInformation';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
 import { Paper, CssBaseline } from '@material-ui/core';
 import { lightGreen50 } from 'material-ui/styles/colors';
 
@@ -101,44 +101,31 @@ class StrengthStandards extends React.Component {
         return(
             <div>
                 <CssBaseline />
-                <Paper className={classes.paper} >
-                    <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
-                </Paper>
-                <Paper className={classes.paper} >
-                    <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
-                </Paper>
+                <Grid container spacing={16}>
+                    <Grid item sm={12} md={6}>
+                        <Paper className={classes.paper} >
+                            <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
+                        </Paper>
+                    </Grid>
+                    <Grid item sm={12} md={6}>
+                        <Paper className={classes.paper} >
+                            <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
+                        </Paper>
+                    </Grid>
+                </Grid>
             </div>
         )
     }
 }
 
 const styles = theme => ({
-    root: {
-        ...theme.mixins.gutters(),
-      paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2
-    },
     paper: {
-        marginTop: theme.spacing.unit * 3,
-        marginBottom: theme.spacing.unit * 3,
+        marginBottom: theme.spacing.unit,
         backgroundColor: lightGreen50,
         padding: theme.spacing.unit * 2,
         [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
-            marginTop: theme.spacing.unit * 6,
-            marginBottom: theme.spacing.unit * 6,
             padding: theme.spacing.unit * 3,
-        },
-    },
-    layout: {
-        ...theme.mixins.gutters(),
-        width: 'auto',
-        marginLeft: theme.spacing.unit * 2,
-        marginRight: theme.spacing.unit * 2,
-        [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
-          width: 600,
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        },
+        }
       }
   });
 
