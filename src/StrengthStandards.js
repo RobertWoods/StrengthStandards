@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import ExerciseMaxForm from './ExerciseMaxForm';
 import CalculationInformation from './CalculationInformation';
-import { withStyles, Grid, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { withStyles, Grid, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import { Paper, CssBaseline } from '@material-ui/core';
 import { lightGreen50, lightGreen200 } from 'material-ui/styles/colors';
 
@@ -103,9 +103,12 @@ class StrengthStandards extends React.Component {
                 <CssBaseline />
                 <AppBar className={classes.appBar} position="static" color="default">
                     <Toolbar>
-                    <Typography variant="h6" color="inherit">
+                    <Typography className={classes.appBarTitle} component="h2" variant="h5" align="center" color="inherit" noWrap>
                         Strength Standards
                     </Typography>
+                    <Button variant="outlined" size="small">
+                        Sign Up
+                    </Button>
                     </Toolbar>
                 </AppBar>
                 <Grid container spacing={16}>
@@ -134,10 +137,13 @@ const styles = theme => ({
             padding: theme.spacing.unit * 3,
         }
       },
-      appBar: {
-          backgroundColor: lightGreen200,
-          marginBottom: theme.spacing.unit * 2
-      }
+    appBar: {
+        backgroundColor: lightGreen200,
+        marginBottom: theme.spacing.unit * 2
+    },
+    appBarTitle: {
+        flex: 1
+    }
   });
 
 export default withStyles(styles)(StrengthStandards);
