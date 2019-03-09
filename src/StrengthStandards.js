@@ -111,13 +111,13 @@ class StrengthStandards extends React.Component {
                     </Button>
                     </Toolbar>
                 </AppBar>
-                <Grid container spacing={16}>
-                    <Grid item sm={12} md={6}>
+                <Grid container spacing={16} className={classes.layout}>
+                    <Grid item sm={12} md={3}>
                         <Paper className={classes.paper} >
                             <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
                         </Paper>
                     </Grid>
-                    <Grid item sm={12} md={6}>
+                    <Grid item sm={12} md={9}>
                         <Paper className={classes.paper} >
                             <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
                         </Paper>
@@ -143,6 +143,11 @@ const styles = theme => ({
     },
     appBarTitle: {
         flex: 1
+    },
+    layout: {
+        width: 'auto',
+        marginLeft: theme.spacing.unit * 1,
+        marginRight: theme.spacing.unit * 1,
     }
   });
 
