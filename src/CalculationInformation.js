@@ -22,8 +22,8 @@ function CalculationInformation(props){
     return(
         <Grid container direction="row" justify="center" alignItems="center">
             <Grid item xs={12}>
-                <Grid container direction="row" justify="left" alignItems="center">
-                    <Grid item xs={8} sm={4}>
+                <Grid container direction="row" justify="flex-start" alignItems="center">
+                    <Grid item xs={8} sm={4} className={classes.leftInput}>
                         <TextField label="Weight" className="lifter-weight" type="number" onChange={(event)=>props.handler(event.target.value, false, false, false)}></TextField>
                     </Grid>
 
@@ -38,11 +38,11 @@ function CalculationInformation(props){
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Grid container direction="row" justify="left" alignItems="center" className={classes.root}>
+                <Grid container direction="row" justify="flex-start" alignItems="center" className={classes.root}>
                     <Grid item xs={8} sm={4}>
                         <FormControl>
                             <InputLabel shrink htmlFor="max-equation">Equation</InputLabel>
-                            <Select id="max-equation" value={props.maxInformation.equation.name} onChange={(event)=>props.handler(false, false, event.target.value, false)} >
+                            <Select id="max-equation" className={classes.leftInput} value={props.maxInformation.equation.name} onChange={(event)=>props.handler(false, false, event.target.value, false)} >
                                 { equationOptions }
                             </Select>
                         </FormControl>
@@ -66,6 +66,9 @@ const styles = theme => ({
     root: {
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2
+    },
+    leftInput: {
+        marginRight: theme.spacing.unit
     }
 });
 

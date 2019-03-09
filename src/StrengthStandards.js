@@ -76,6 +76,10 @@ class StrengthStandards extends React.Component {
         }
     ]
 
+    fetchData = () => {
+        console.log("hello");
+    }
+
     getKeyFromName(name, list){
         return list.reduce((acc, curr) => {
             if(curr.name===name) return curr;
@@ -106,18 +110,18 @@ class StrengthStandards extends React.Component {
                     <Typography className={classes.appBarTitle} component="h2" variant="h5" align="center" color="inherit" noWrap>
                         Strength Standards
                     </Typography>
-                    <Button variant="outlined" size="small">
+                    <Button variant="outlined" size="small" onClick={this.fetchData}>
                         Sign Up
                     </Button>
                     </Toolbar>
                 </AppBar>
                 <Grid container spacing={16}>
-                    <Grid item sm={12} md={6}>
+                    <Grid item sm={12} md={3}>
                         <Paper className={classes.paper} >
                             <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation}/>
                         </Paper>
                     </Grid>
-                    <Grid item sm={12} md={6}>
+                    <Grid item sm={12} md={9}>
                         <Paper className={classes.paper} >
                             <ExerciseMaxForm lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
                         </Paper>

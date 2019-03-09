@@ -25,7 +25,7 @@ function MaxRange(props){
 
     return(
         <div className={classes.root}>
-            <Grid container direction="row" justify="left" alignItems="center">
+            <Grid container direction="row" justify="flex-start" alignItems="center">
                 <Grid item xs={2}>
                     <span>{getMessage()}</span>
                 </Grid>
