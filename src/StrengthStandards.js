@@ -76,8 +76,32 @@ class StrengthStandards extends React.Component {
         }
     ]
 
-    fetchData = () => {
-        console.log("hello");
+    options = {
+        method: 'POST',
+        headers: {
+            "Authorization": 'Basic' + btoa('x:x')
+        }
+    }
+
+    getToken = () => '';
+
+    headers = {
+        Authorization: 'Token ' + this.getToken()
+    }
+
+    fetchToken = () => {
+        fetch('http://127.0.0.1:8000/api-token-auth/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: 'x',
+                password: 'x'
+            })
+        })
+        .then((result) => result.json()
+        .then((result) => console.log(result)));
     }
 
     getKeyFromName(name, list){
@@ -110,7 +134,7 @@ class StrengthStandards extends React.Component {
                     <Typography className={classes.appBarTitle} component="h2" variant="h5" align="center" color="inherit" noWrap>
                         Strength Standards
                     </Typography>
-                    <Button variant="outlined" size="small" onClick={this.fetchData}>
+                    <Button variant="outlined" size="small" onClick={this.fetchToken}>
                         Sign Up
                     </Button>
                     </Toolbar>
