@@ -101,7 +101,22 @@ class StrengthStandards extends React.Component {
             })
         })
         .then((result) => result.json()
-        .then((result) => console.log(result)));
+        .then(result => {
+            localStorage.setItem('token', result.token);
+            fetch('http://127.0.0.1:8000/personalRecords/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + result.token
+                },
+                body: JSON.stringify({
+                    'exercise': 'Bench',
+                    'weight': 500,
+                    'reps': 1
+                })
+            })
+            .then(result => console.log(result))
+        }));
     }
 
     getKeyFromName(name, list){
