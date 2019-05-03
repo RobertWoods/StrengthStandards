@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { withStyles, AppBar, Toolbar, Typography, Button, Modal, Paper, TextField } from '@material-ui/core';
 import { lightGreen200 } from 'material-ui/styles/colors';
 
 function MyAppBar(props) {
@@ -19,11 +19,12 @@ function MyAppBar(props) {
                 password: 'x'
             })
         })
-            .then((result) => result.json()
-                .then(result => {
-                    localStorage.setItem('token', result.token);
-                    props.handler(true);
-                }));
+            .then((result) => result.json())
+            .then(result => {
+                localStorage.setItem('token', result.token);
+                props.handler(true);
+            })
+            .catch(result => props.handler(true));
     }
 
     const { classes } = props;
@@ -37,6 +38,15 @@ function MyAppBar(props) {
                     {props.loggedIn ? "Log Out" : "Log In"}
                 </Button>
             </Toolbar>
+            <Modal open={!props.loggedIn}>
+                <Paper className={classes.modalPaper}>
+                    <TextField label="email" type="email" />
+                    <TextField label="password" type="password" />
+                    <br /><br />
+                    <Button onClick={login} className={classes.button} variant="contained">Login</Button>
+                    <Button onClick={login} className={classes.button} variant="contained">Cancel</Button>
+                </Paper>
+            </Modal>
         </AppBar>
     )
 }
@@ -48,6 +58,20 @@ const styles = theme => ({
     },
     appBarTitle: {
         flex: 1
+    },
+    modalPaper: {
+        position: 'absolute',
+        width: theme.spacing.unit * 50,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+        outline: 'none',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+    },
+    button: {
+        marginRight: theme.spacing.unit * 4
     }
 });
 

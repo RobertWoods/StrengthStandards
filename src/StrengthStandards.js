@@ -19,7 +19,7 @@ class StrengthStandards extends React.Component {
                 equation: this.equationList[0],
                 standards: this.standardsList[0]
             },
-            loggedIn: localStorage.getItem('token')
+            loggedIn: localStorage.getItem('token') !== null
         }
         this.handleCalculationChange = this.handleCalculationChange.bind(this);
     };
