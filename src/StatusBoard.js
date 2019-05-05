@@ -41,7 +41,7 @@ export default class StatusBoard extends React.Component {
     render(){
         return(
             <div>
-                <Grid container direction="row" justify="left" alignItems="center" spacing={16}>
+                <Grid container direction="row" justify="flex-start" alignItems="center" spacing={16}>
                     <Grid item md={3}>
                         <TextField label={this.props.exercise.name} id="weightInput" InputProps={this.adornments[0]} type="number" onChange={this.handleChange}/>
                     </Grid>

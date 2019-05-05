@@ -22,7 +22,11 @@ function CalculationInformation(props){
     return(
         <Grid container direction="row" justify="center" alignItems="center">
             <Grid item xs={12}>
+<<<<<<< HEAD
                 <Grid container direction="row" justify="left" alignItems="center">
+=======
+                <Grid container direction="row" justify="flex-start" alignItems="center">
+>>>>>>> feature_basic_login
                     <Grid item xs={8} sm={4} className={classes.leftInput}>
                         <TextField label="Weight" className="lifter-weight" type="number" onChange={(event)=>props.handler(event.target.value, false, false, false)}></TextField>
                     </Grid>
@@ -38,11 +42,16 @@ function CalculationInformation(props){
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Grid container direction="row" justify="left" alignItems="center" className={classes.root}>
+                <Grid container direction="row" justify="flex-start" alignItems="center" className={classes.root}>
                     <Grid item xs={8} sm={4}>
                         <FormControl>
+<<<<<<< HEAD
                             <InputLabel shrink htmlFor="max-equation" className={classes.leftInput}>Equation</InputLabel>
                             <Select id="max-equation" value={props.maxInformation.equation.name} onChange={(event)=>props.handler(false, false, event.target.value, false)} >
+=======
+                            <InputLabel shrink htmlFor="max-equation">Equation</InputLabel>
+                            <Select id="max-equation" className={classes.leftInput} value={props.maxInformation.equation.name} onChange={(event)=>props.handler(false, false, event.target.value, false)} >
+>>>>>>> feature_basic_login
                                 { equationOptions }
                             </Select>
                         </FormControl>
