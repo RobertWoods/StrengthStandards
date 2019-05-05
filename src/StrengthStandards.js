@@ -108,7 +108,7 @@ class StrengthStandards extends React.Component {
             <div>
                 <CssBaseline />
                 <MyAppBar handler={this.handleLoginState} loggedIn={this.state.loggedIn}></MyAppBar>
-                <Grid container spacing={16}>
+                <Grid container className={classes.mainGrid} spacing={16}>
                     <Grid item sm={12} md={3}>
                         <Paper className={classes.paper} >
                             <CalculationInformation handler={this.handleCalculationChange} standards={this.standardsList} equations={this.equationList} lifterInformation={this.state.lifterInformation} maxInformation={this.state.maxInformation} />
@@ -133,6 +133,10 @@ const styles = theme => ({
         [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
             padding: theme.spacing.unit * 3,
         }
+    },
+    mainGrid: {
+        margin: 'auto',
+        maxWidth: '75%'
     }
 });
 
